@@ -1,9 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { getColor, trimToLength } from '$lib/helpers';
-	import type { km_content } from '@prisma/client';
-	import { onMount } from 'svelte';
-	import InfiniteScroll from 'svelte-infinite-scroll';
 	import type { PageData } from './$types';
 
 	let search = '';
