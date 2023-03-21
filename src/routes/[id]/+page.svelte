@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { trimToLength } from '$lib/helpers';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -51,9 +52,11 @@
 			<p class="prose prose-xl">รายละเอียดเบื้องต้น</p>
 			<p class="prose">{data.content.content}</p>
 			<p class="prose prose-xl">URL</p>
-			<a class="prose" href={data.content.link} target="_blank" rel="nofollow noreferer noopener"
-				>{data.content.link}</a
-			>
+			<p class="prose">
+				<a href={data.content.link} target="_blank" rel="nofollow noreferer noopener"
+					>{trimToLength(data.content.link, 50)}</a
+				>
+			</p>
 		</div>
 	</div>
 </div>
