@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { trimToLength } from '$lib/helpers';
+	import { getColor, trimToLength } from '$lib/helpers';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -41,22 +41,30 @@
 </svelte:head>
 
 <div class="flex justify-center">
-	<div class="card w-1/2 bg-base-100 shadow-xl">
+	<div class="card w-1/2 bg-base-200/30 shadow-xl">
 		<div class="card-body">
 			<h2 class="card-title justify-center">
-				<span class="prose text-xl font-bold">{data.content.km_category.title}</span>
+				<span
+					class="prose text-xl font-bold badge badge-{getColor(
+						data.content.km_category_id ?? 'default'
+					)} py-5 px-5">{data.content.km_category.title}</span
+				>
 			</h2>
 
 			<p class="prose prose-xl font-bold">หัวเรื่อง</p>
-			<p class="prose ml-4">{data.content.title}</p>
+			<pre class="prose whitespace-pre-line px-4 text-justify">
+				<span>{data.content.title}</span>
+			</pre>
 			<p class="prose prose-xl font-bold">รายละเอียดเบื้องต้น</p>
-			<p class="prose ml-4">{data.content.content}</p>
+			<pre class="prose whitespace-pre-line px-4 text-justify">
+				<span>{data.content.content}</span>
+			</pre>
 			<p class="prose prose-xl font-bold">Website</p>
-			<p class="prose ml-4">
+			<pre class="prose whitespace-pre-line px-4 text-justify">
 				<a href={data.content.link} target="_blank" rel="nofollow noreferer noopener"
 					>{trimToLength(data.content.link ?? '', 50)}</a
 				>
-			</p>
+			</pre>
 		</div>
 	</div>
 </div>
