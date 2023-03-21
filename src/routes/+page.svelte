@@ -48,11 +48,11 @@
 	/>
 </svelte:head>
 
-<div class="flex flex-row gap-2">
+<div class="grid grid-cols-4 gap-2">
 	<input
 		type="text"
 		placeholder="ค้นหา"
-		class="input input-bordered w-full "
+		class="input input-bordered col-span-2"
 		bind:value={search}
 		on:keyup={(event) => {
 			if (event.key === 'Enter') {
@@ -60,7 +60,7 @@
 			}
 		}}
 	/>
-	<select class="select select-bordered w-full max-w-xs" bind:value={category}>
+	<select class="select select-bordered col-span-2" bind:value={category}>
 		<option selected value="">หมวดหมู่ทั้งหมด</option>
 		{#each data.categories as category}
 			<option value={category.id}>{category.title}</option>
@@ -147,17 +147,16 @@
 				</tr>
 			{/each}
 		</tbody>
-		<tfoot>
-			<tr
-				><div class="btn-group mt-4 mb-40">
-					{#each Array.from({ length: data.totalPage }, (_, i) => i + 1) as number}
-						<a
-							href="/?search={search}&category_id={category}&limit=15&page={number}"
-							class="btn btn-sm {data.page === number ? 'btn-active' : ''}">{number}</a
-						>
-					{/each}
-				</div></tr
-			>
-		</tfoot>
 	</table>
+</div>
+
+<div class="w-full">
+	<div class="btn-group mt-4 flex-wrap gap-y-2">
+		{#each Array.from({ length: data.totalPage }, (_, i) => i + 1) as number}
+			<a
+				href="/?search={search}&category_id={category}&limit=15&page={number}"
+				class="btn btn-sm {data.page === number ? 'btn-active' : ''}">{number}</a
+			>
+		{/each}
+	</div>
 </div>
