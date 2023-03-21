@@ -46,7 +46,7 @@
 			<h2 class="card-title justify-center">
 				<span
 					class="prose text-xl font-bold badge badge-{getColor(
-						data.content.km_category_id ?? 'default'
+						data.content.km_category.title ?? 'default'
 					)} py-5 px-5">{data.content.km_category.title}</span
 				>
 			</h2>
