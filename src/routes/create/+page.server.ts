@@ -33,7 +33,7 @@ export const actions: Actions = {
 
 		if (!captchaResponse.success) {
 			return fail(500, {
-				captchaFailed: false,
+				captchaFailed: true,
 				message: 'Captcha failed',
 				title,
 				content,
