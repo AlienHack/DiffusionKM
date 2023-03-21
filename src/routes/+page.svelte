@@ -69,7 +69,7 @@
 		<!-- head -->
 		<thead>
 			<tr>
-				<th> # </th>
+				<th><span class="ml-2">#</span></th>
 				<th>หมวดหมู่</th>
 				<th>หัวเรื่อง</th>
 				<th>วันที่</th>
@@ -138,12 +138,17 @@
 					<td>
 						{trimToLength(content.author ?? '', 15)}
 					</td>
-					<td>
+					<td class="prose">
 						<a href="/{content.id}">รายละเอียด</a>
 					</td>
 				</tr>
 			{/each}
 		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="6" />
+			</tr>
+		</tfoot>
 	</table>
 </div>
 

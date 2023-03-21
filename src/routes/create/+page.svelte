@@ -9,7 +9,6 @@
 	let submitting = false;
 
 	export let data: PageData;
-	export let form: ActionData;
 
 	onMount(() => {
 		NProgress.configure({
@@ -67,7 +66,7 @@
 	}}
 >
 	<div class="flex justify-center">
-		<div class="card w-96 bg-base-100 shadow-xl">
+		<div class="card w-96 bg-base-200/30 shadow-xl">
 			<div class="card-body">
 				<h2 class="card-title prose prose-xl">เพิ่มความรู้ใหม่</h2>
 				<p class="prose prose-sm">
