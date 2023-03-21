@@ -25,7 +25,7 @@ export const actions: Actions = {
 				content,
 				km_category_id: categoryId,
 				link,
-				author
+				author: author ?? ''
 			}
 		});
 
