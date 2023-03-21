@@ -41,7 +41,7 @@
 </svelte:head>
 
 <div class="flex justify-center">
-	<div class="card w-1/2 bg-base-200/30 shadow-xl">
+	<div class="card w-full lg:w-4/5 xl:w-2/3 bg-base-200/30 shadow-xl">
 		<div class="card-body">
 			<h2 class="card-title justify-center">
 				<span
@@ -56,7 +56,7 @@
 				<span>{data.content.title}</span>
 			</pre>
 			<p class="prose prose-xl font-bold">รายละเอียดเบื้องต้น</p>
-			<pre class="prose whitespace-pre-line px-4 text-justify">
+			<pre class="prose whitespace-pre-line px-4 text-justify max-w-full">
 				<span>{data.content.content}</span>
 			</pre>
 			<p class="prose prose-xl font-bold">Website</p>
