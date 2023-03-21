@@ -1,6 +1,7 @@
 import { ToPOJO } from '$lib/helpers';
 import { prisma } from '$lib/prisma';
 import type { km_category } from '@prisma/client';
+import { fail } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load = (async () => {
@@ -20,7 +21,7 @@ export const actions: Actions = {
 		const author = formData.get('author') as string;
 		const hCaptchaToken = formData.get('h-captcha-response') as string;
 
-		const captchaResponse = await fetch('https://hcaptcha.com/siteverify', {
+		const captchaRequest = await fetch('https://hcaptcha.com/siteverify', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded'
@@ -28,11 +29,19 @@ export const actions: Actions = {
 			body: `secret=0x11e8f53D672f59E6F6C8660AEAdBf9C1b8Dffb92&response=${hCaptchaToken}`
 		});
 
-		captchaResponse.json().then((data) => {
-			if (!data.success) {
-				throw new Error('Captcha failed');
-			}
-		});
+		const captchaResponse = await captchaRequest.json();
+
+		if (!captchaResponse.success) {
+			return fail(500, {
+				captchaFailed: false,
+				message: 'Captcha failed',
+				title,
+				content,
+				category_id: categoryId,
+				link,
+				author
+			});
+		}
 
 		await prisma.km_content.create({
 			data: {

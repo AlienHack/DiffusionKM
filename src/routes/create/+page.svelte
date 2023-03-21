@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
-	import type { PageData } from './$types';
+	import type { ActionData, PageData } from './$types';
 
 	export let data: PageData;
+	export let form: ActionData;
 </script>
 
 <svelte:head>
@@ -59,7 +60,12 @@
 					โปรดค้นหาข้อมูลก่อนแบ่งปันความรู้ใหม่ๆ กันนะครับ จะได้ไม่มีข้อมูลซ้ำเยอะ :)
 				</p>
 				<p class="prose prose-xl">หมวดหมู่</p>
-				<select class="select select-bordered w-full max-w-xs" required name="category_id">
+				<select
+					class="select select-bordered w-full max-w-xs"
+					required
+					name="category_id"
+					value={form?.category_id ?? ''}
+				>
 					<option disabled selected value="">ระบุหมวดหมู่</option>
 					{#each data.categories as category}
 						<option value={category.id}>{category.title}</option>
@@ -71,6 +77,7 @@
 					placeholder="ระบุหัวเรื่อง เช่น วิธีการเทรนโมเดล"
 					class="input input-bordered w-full max-w-xs"
 					name="title"
+					value={form?.title ?? ''}
 					required
 				/>
 				<p class="prose prose-xl">รายละเอียดเบื้องต้น</p>
@@ -78,6 +85,7 @@
 					class="textarea textarea-bordered max-w-xs"
 					placeholder="ระบุรายละเอียดเบื้องต้น เช่น การเทรนโมเดลด้วย LoRA"
 					name="content"
+					value={form?.content ?? ''}
 					required
 				/>
 				<p class="prose prose-xl">ผู้เขียนบทความ</p>
@@ -86,6 +94,7 @@
 					placeholder="ระบุผู้เขียนบทความ"
 					class="input input-bordered w-full max-w-xs"
 					name="author"
+					value={form?.author ?? ''}
 					required
 				/>
 				<p class="prose prose-xl">URL</p>
@@ -94,8 +103,12 @@
 					placeholder="ระบุ URL เช่น https://www.google.co.th"
 					class="input input-bordered w-full max-w-xs"
 					name="link"
+					value={form?.link ?? ''}
 					required
 				/>
+				{#if form?.captchaFailed}
+					<p class="text-error">Captcha ไม่ถูกต้อง</p>
+				{/if}
 				<div class="h-captcha" data-sitekey="06e72d3c-bb85-4ec4-b9c3-75f50ee7ac18" />
 				<div class="card-actions justify-end">
 					<button class="btn btn-primary">เพิ่มความรู้</button>
