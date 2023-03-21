@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { getColor, trimToLength } from '$lib/helpers';
 	import type { PageData } from './$types';
+	import DOMPurify from 'isomorphic-dompurify';
 
 	export let data: PageData;
 </script>
@@ -57,7 +58,7 @@
 			</pre>
 			<p class="prose prose-xl font-bold">รายละเอียดเบื้องต้น</p>
 			<pre class="prose whitespace-pre-line px-4 text-justify max-w-full">
-				<span>{data.content.content}</span>
+				<span>{@html DOMPurify.sanitize(data.content.content ?? '')}</span>
 			</pre>
 			<p class="prose prose-xl font-bold">Website</p>
 			<pre class="prose whitespace-pre-line px-4 text-justify">
