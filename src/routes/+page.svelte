@@ -161,7 +161,7 @@
 							>{/if}</th
 					>
 					<td>
-						<span class="badge badge-{getColor(content.km_category_id ?? 'default')}"
+						<span class="badge badge-{getColor(content.km_category.title ?? 'default')}"
 							>{content.km_category.title}</span
 						>
 					</td>
