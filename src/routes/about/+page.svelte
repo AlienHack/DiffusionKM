@@ -31,7 +31,7 @@
 </svelte:head>
 
 <div class="flex justify-center">
-	<div class="card w-full bg-base-100 shadow-xl">
+	<div class="card w-full bg-base-200/30 shadow-xl">
 		<div class="card-body">
 			<h2 class="card-title">เกี่ยวกับ</h2>
 			<p>เว็บไซต์นี้สร้างขึ้นเพื่อเป็นแหล่งข้อมูลการค้นหา และจัดทำ Stable Diffusion</p>

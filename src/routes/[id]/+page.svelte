@@ -44,17 +44,17 @@
 	<div class="card w-1/2 bg-base-100 shadow-xl">
 		<div class="card-body">
 			<h2 class="card-title justify-center">
-				<span class="prose text-xl">{data.content.km_category.title}</span>
+				<span class="prose text-xl font-bold">{data.content.km_category.title}</span>
 			</h2>
 
-			<p class="prose prose-xl">หัวเรื่อง</p>
-			<p class="prose">{data.content.title}</p>
-			<p class="prose prose-xl">รายละเอียดเบื้องต้น</p>
-			<p class="prose">{data.content.content}</p>
-			<p class="prose prose-xl">URL</p>
-			<p class="prose">
+			<p class="prose prose-xl font-bold">หัวเรื่อง</p>
+			<p class="prose ml-4">{data.content.title}</p>
+			<p class="prose prose-xl font-bold">รายละเอียดเบื้องต้น</p>
+			<p class="prose ml-4">{data.content.content}</p>
+			<p class="prose prose-xl font-bold">Website</p>
+			<p class="prose ml-4">
 				<a href={data.content.link} target="_blank" rel="nofollow noreferer noopener"
-					>{trimToLength(data.content.link, 50)}</a
+					>{trimToLength(data.content.link ?? '', 50)}</a
 				>
 			</p>
 		</div>

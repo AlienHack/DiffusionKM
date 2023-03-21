@@ -5,6 +5,18 @@ const config = {
 		extend: {}
 	},
 
+	daisyui: {
+		themes: [
+			{
+				light: {
+					...require('daisyui/src/colors/themes')['[data-theme=light]'],
+					primary: '#3355CC',
+					'primary-focus': 'mediumblue'
+				}
+			}
+		]
+	},
+
 	safelist: [
 		'badge-primary',
 		'badge-secondary',
