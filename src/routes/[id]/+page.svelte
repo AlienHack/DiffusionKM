@@ -41,12 +41,12 @@
 </svelte:head>
 
 <div class="flex justify-center">
-	<div class="card w-1/2 bg-base-200/30 shadow-xl">
+	<div class="card w-full lg:w-4/5 xl:w-2/3 bg-base-200/30 shadow-xl">
 		<div class="card-body">
 			<h2 class="card-title justify-center">
 				<span
 					class="prose text-xl font-bold badge badge-{getColor(
-						data.content.km_category_id ?? 'default'
+						data.content.km_category.title ?? 'default'
 					)} py-5 px-5">{data.content.km_category.title}</span
 				>
 			</h2>
@@ -56,7 +56,7 @@
 				<span>{data.content.title}</span>
 			</pre>
 			<p class="prose prose-xl font-bold">รายละเอียดเบื้องต้น</p>
-			<pre class="prose whitespace-pre-line px-4 text-justify">
+			<pre class="prose whitespace-pre-line px-4 text-justify max-w-full">
 				<span>{data.content.content}</span>
 			</pre>
 			<p class="prose prose-xl font-bold">Website</p>

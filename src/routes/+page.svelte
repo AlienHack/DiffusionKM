@@ -219,6 +219,10 @@
 						>
 					</td>
 				</tr>
+			{:else}
+				<tr>
+					<td colspan="7" class="text-center">ไม่พบข้อมูล</td>
+				</tr>
 			{/each}
 		</tbody>
 		<tfoot>
