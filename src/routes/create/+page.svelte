@@ -55,9 +55,10 @@
 	method="post"
 	use:enhance={() => {
 		submitting = true;
+		NProgress.start();
 		return async ({ result, update }) => {
 			submitting = false;
-			NProgress.start();
+
 			if (result.type === 'success') {
 				NProgress.done();
 				goto('/');
