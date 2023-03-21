@@ -1,9 +1,22 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
-	import type { PageData } from './$types';
+	import type { ActionData, PageData } from './$types';
+	import 'nprogress/nprogress.css';
+	import NProgress from 'nprogress';
+	import { onMount } from 'svelte';
+
+	let submitting = false;
 
 	export let data: PageData;
+	export let form: ActionData;
+
+	onMount(() => {
+		NProgress.configure({
+			minimum: 0.16,
+			showSpinner: false
+		});
+	});
 </script>
 
 <svelte:head>
@@ -36,16 +49,18 @@
 		property="twitter:image"
 		content="https://blogs.code.productions/content/images/2023/03/Stable-Diffusion.jpeg"
 	/>
-
-	<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 </svelte:head>
 
 <form
 	action="?/create"
 	method="post"
 	use:enhance={() => {
+		submitting = true;
 		return async ({ result, update }) => {
+			submitting = false;
+			NProgress.start();
 			if (result.type === 'success') {
+				NProgress.done();
 				goto('/');
 			}
 		};
@@ -96,9 +111,8 @@
 					name="link"
 					required
 				/>
-				<div class="h-captcha" data-sitekey="06e72d3c-bb85-4ec4-b9c3-75f50ee7ac18" />
 				<div class="card-actions justify-end">
-					<button class="btn btn-primary">เพิ่มความรู้</button>
+					<button class="btn btn-primary" disabled={submitting}>เพิ่มความรู้</button>
 				</div>
 			</div>
 		</div>

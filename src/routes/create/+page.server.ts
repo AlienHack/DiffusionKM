@@ -18,21 +18,6 @@ export const actions: Actions = {
 		const categoryId = formData.get('category_id') as string;
 		const link = formData.get('link') as string;
 		const author = formData.get('author') as string;
-		const hCaptchaToken = formData.get('h-captcha-response') as string;
-
-		const captchaResponse = await fetch('https://hcaptcha.com/siteverify', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded'
-			},
-			body: `secret=0x11e8f53D672f59E6F6C8660AEAdBf9C1b8Dffb92&response=${hCaptchaToken}`
-		});
-
-		captchaResponse.json().then((data) => {
-			if (!data.success) {
-				throw new Error('Captcha failed');
-			}
-		});
 
 		await prisma.km_content.create({
 			data: {
