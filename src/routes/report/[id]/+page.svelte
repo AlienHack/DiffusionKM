@@ -5,6 +5,7 @@
 	import 'nprogress/nprogress.css';
 	import NProgress from 'nprogress';
 	import { onMount } from 'svelte';
+	import { getColor, trimToLength } from '$lib/helpers';
 
 	let submitting = false;
 
@@ -69,51 +70,76 @@
 	<div class="flex justify-center">
 		<div class="card w-96 bg-base-200/30 shadow-xl">
 			<div class="card-body">
-				<h2 class="card-title prose prose-xl">เพิ่มความรู้ใหม่</h2>
-				<p class="prose prose-sm">
-					โปรดค้นหาข้อมูลก่อนแบ่งปันความรู้ใหม่ๆ กันนะครับ จะได้ไม่มีข้อมูลซ้ำเยอะ :)
+				<h2 class="card-title prose prose-xl">รายงาน</h2>
+				<p class="prose prose-base">
+					ท่านกำลังรายงาน <span class="text-error">{data.content.title}</span>
 				</p>
+				<p class="prose prose-sm">รายงานการละเมิดลิขสิทธ์ สแปม หรือเนื้อหาที่ไม่เหมาะสม</p>
+				<input type="hidden" name="content_id" bind:value={data.content.id} />
 				<p class="prose prose-xl">หมวดหมู่<span class="text-error">*</span></p>
-				<select class="select select-bordered w-full max-w-xs" required name="category_id">
+				<select class="select select-bordered w-full max-w-xs" required name="report_category">
 					<option disabled selected value="">ระบุหมวดหมู่</option>
-					{#each data.categories as category}
-						<option value={category.id}>{category.title}</option>
-					{/each}
+					<option value="ละเมิดลิขสิทธ์">ละเมิดลิขสิทธ์</option>
+					<option value="ละเมิดลิขสิทธ์">เนื้อหาที่ไม่เหมาะสม</option>
+					<option value="สแปม">สแปม</option>
+					<option value="อื่นๆ">อื่นๆ</option>
 				</select>
-				<p class="prose prose-xl">หัวเรื่อง<span class="text-error">*</span></p>
-				<input
-					type="text"
-					placeholder="ระบุหัวเรื่อง เช่น วิธีการเทรนโมเดล"
-					class="input input-bordered w-full max-w-xs"
-					name="title"
-					required
-				/>
 				<p class="prose prose-xl">รายละเอียดเบื้องต้น<span class="text-error">*</span></p>
 				<textarea
 					class="textarea textarea-bordered max-w-xs"
-					placeholder="ระบุรายละเอียดเบื้องต้น เช่น การเทรนโมเดลด้วย LoRA"
-					name="content"
+					placeholder="ระบุรายละเอียดเบื้องต้น เช่น รายงานการละเมิดลิขสิทธ์ สแปม หรือเนื้อหาที่ไม่เหมาะสม"
+					name="description"
 					required
 				/>
-				<p class="prose prose-xl">ผู้เขียนบทความ</p>
+				<p class="prose prose-xl">ผู้รายงาน</p>
 				<input
 					type="text"
-					placeholder="ระบุผู้เขียนบทความ"
+					placeholder="ผู้รายงาน"
 					class="input input-bordered w-full max-w-xs"
 					name="author"
-				/>
-				<p class="prose prose-xl">URL<span class="text-error">*</span></p>
-				<input
-					type="text"
-					placeholder="ระบุ URL เช่น https://www.google.co.th"
-					class="input input-bordered w-full max-w-xs"
-					name="link"
 					required
 				/>
 				<div class="card-actions justify-end">
-					<button class="btn btn-primary" disabled={submitting}>เพิ่มความรู้</button>
+					<button class="btn btn-error" disabled={submitting}>ส่งรายงาน</button>
 				</div>
 			</div>
 		</div>
 	</div>
 </form>
+
+<div class="overflow-x-auto mt-4 w-full justify-center items-center mx-auto">
+	<table class="table table-compact w-full">
+		<thead>
+			<tr>
+				<th class="w-32">หมวดหมู่</th>
+				<th>รายละเอียด</th>
+				<th class="w-32">ผู้รายงาน</th>
+			</tr>
+		</thead>
+		<tbody>
+			{#each data.reports as report, i}
+				<tr>
+					<td
+						><span class="badge badge-{getColor(report.title ?? 'default')}">{report.title}</span
+						></td
+					>
+					<td>
+						<p class="prose">{trimToLength(report.description ?? '', 100)}</p>
+					</td>
+					<td><p class="prose">{trimToLength(report.author ?? '', 30)}</p></td>
+				</tr>
+			{:else}
+				<tr>
+					<td colspan="3" class="text-center">ไม่พบรายงาน</td>
+				</tr>
+			{/each}
+		</tbody>
+		<tfoot>
+			<tr>
+				<th>หมวดหมู่</th>
+				<th>รายละเอียด</th>
+				<th>ผู้รายงาน</th>
+			</tr>
+		</tfoot>
+	</table>
+</div>

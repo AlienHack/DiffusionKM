@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { getColor, trimToLength } from '$lib/helpers';
+	import { getColor, nFormatter, trimToLength } from '$lib/helpers';
 	import type { PageData } from './$types';
 
 	let search = '';
@@ -8,6 +8,22 @@
 
 	function doSearch() {
 		goto(`/?search=${search}&category_id=${category}`);
+	}
+
+	async function updateView(id: string) {
+		let request = await fetch(`/api/update-view/${id}`, {
+			method: 'POST'
+		});
+
+		let result = await request.json();
+		if (result.success) {
+			// Update view
+			let content = data.contents.find((content) => content.id === id);
+			if (content) {
+				content.views = result.views;
+				data.contents = data.contents;
+			}
+		}
 	}
 
 	export let data: PageData;
@@ -74,7 +90,37 @@
 				<th>หัวเรื่อง</th>
 				<th>วันที่</th>
 				<th>ผู้เขียน</th>
-				<th>รายละเอียด/ลิงค์</th>
+				<th class="flex justify-center"
+					><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+						><path
+							fill="currentColor"
+							d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3z"
+						/></svg
+					></th
+				>
+				<th class=""
+					><svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="24"
+						height="24"
+						viewBox="0 0 21 21"
+						class="ml-14"
+						><g
+							fill="none"
+							fill-rule="evenodd"
+							stroke="currentColor"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							><path
+								d="m10.5 15.429l3.548 1.837a1 1 0 0 0 .907.006l2.992-1.496a1 1 0 0 0 .553-.894v-2.764a1 1 0 0 0-.553-.894L14.5 9.5l-3.46 1.792a1 1 0 0 0-.54.888v3.249z"
+							/><path
+								d="m3.04 15.708l3.008 1.558a1 1 0 0 0 .907.006L10.5 15.5v-3.382a1 1 0 0 0-.553-.894L6.5 9.5l-3.46 1.792a1 1 0 0 0-.54.888v2.64a1 1 0 0 0 .54.888zM6.5 9.429l3.548 1.837a1 1 0 0 0 .907.006L14.5 9.5V6.118a1 1 0 0 0-.553-.894l-2.992-1.496a1 1 0 0 0-.907.006L7.04 5.292a1 1 0 0 0-.54.888v3.249z"
+							/><path
+								d="m6.846 5.673l3.207 1.603a1 1 0 0 0 .894 0L14.12 5.69h0M8.799 4.649L12.5 6.5m.299 4.149L16.5 12.5M4.799 10.649L8.5 12.5m2.346-.827l3.207 1.603a1 1 0 0 0 .894 0l3.172-1.586h0m-15.273-.017l3.207 1.603a1 1 0 0 0 .894 0l3.172-1.586h0M10.5 7.5v4m4 2V17m-8-3.5V17"
+							/></g
+						></svg
+					></th
+				>
 			</tr>
 		</thead>
 		<tbody>
@@ -109,7 +155,13 @@
 						>
 					</td>
 					<td>
-						<a href={content.link} target="_blank" rel="nofollow noreferer noopener"
+						<a
+							href={content.link}
+							target="_blank"
+							rel="nofollow noreferer noopener"
+							on:click={() => {
+								updateView(content.id);
+							}}
 							><div class="flex items-center space-x-3">
 								<div
 									class="hover:cursor-pointer hover:translate-x-1 hover:translate-y-1 hover:transition-all"
@@ -138,15 +190,29 @@
 					<td>
 						{trimToLength(content.author ?? '', 15)}
 					</td>
+					<td class="text-center">{nFormatter(content.views ?? 0, 1)}</td>
 					<td class="prose">
-						<a href="/{content.id}">รายละเอียด</a>
+						<a
+							href="/{content.id}"
+							on:click={() => {
+								updateView(content.id);
+							}}>รายละเอียด</a
+						>
+						|
+						<a
+							class="text-error"
+							href="/report/{content.id}"
+							on:click={() => {
+								updateView(content.id);
+							}}>รายงาน</a
+						>
 					</td>
 				</tr>
 			{/each}
 		</tbody>
 		<tfoot>
 			<tr>
-				<td colspan="6" />
+				<td colspan="7" />
 			</tr>
 		</tfoot>
 	</table>
