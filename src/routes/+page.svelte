@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import Flame from '$lib/components/Flame.svelte';
 	import { getColor, nFormatter, trimToLength } from '$lib/helpers';
 	import type { PageData } from './$types';
 
