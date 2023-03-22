@@ -90,7 +90,7 @@
 	<div class="btn-group mt-4 flex-wrap gap-y-2">
 		{#each Array.from({ length: data.totalPage }, (_, i) => i + 1) as number}
 			<a
-				href="/?search={search}&category_id={category}&limit=15&page={number}"
+				href="/?search={data.search}&category_id={data.category_id}&limit=15&page={number}"
 				class="btn btn-sm {data.page === number ? 'btn-active' : ''}">{number}</a
 			>
 		{/each}
