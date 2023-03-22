@@ -186,10 +186,10 @@
 									class="hover:cursor-pointer hover:translate-x-1 hover:translate-y-1 hover:transition-all"
 								>
 									<div class="font-bold prose ">
-										{trimToLength(content.title ?? '', 50)}
+										{content.title}
 									</div>
 									<div class="text-sm opacity-50 prose prose-sm">
-										{trimToLength(content.content ?? '', 50)}
+										{content.content}
 									</div>
 								</div>
 							</div></a
