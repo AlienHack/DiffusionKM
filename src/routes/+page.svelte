@@ -1,16 +1,12 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Flame from '$lib/components/Flame.svelte';
+	import HeaderCaption from '$lib/components/HeaderCaption.svelte';
 	import KnowledgeRow from '$lib/components/KnowledgeRow.svelte';
+	import Searchbar from '$lib/components/Searchbar.svelte';
+	import StaticMetaHeader from '$lib/components/StaticMetaHeader.svelte';
 	import { getColor, nFormatter, trimToLength } from '$lib/helpers';
 	import type { PageData } from './$types';
-
-	let search = '';
-	let category = '';
-
-	function doSearch() {
-		goto(`/?search=${search}&category_id=${category}`);
-	}
 
 	async function handleUpdateView({
 		detail: { views, id }
@@ -25,74 +21,10 @@
 	export let data: PageData;
 </script>
 
-<svelte:head>
-	<title>Stable Diffusion Thailand KM</title>
+<StaticMetaHeader />
 
-	<meta property="og:type" content="article" />
-
-	<meta property="title" content="Stable Diffusion Thailand KM" />
-
-	<meta property="description" content="แหล่งรวบรวมข้อมูลเกี่ยวกับ Stable Diffusion ในประเทศไทย" />
-
-	<meta name="title" content="Stable Diffusion Thailand KM" />
-	<meta name="description" content="แหล่งรวบรวมข้อมูลเกี่ยวกับ Stable Diffusion ในประเทศไทย" />
-	<meta
-		name="keywords"
-		content="AI, Stable Diffusion, ความรู้, บทความ, เครื่องมือ, วิดีโอสอนใช้งาน, SD"
-	/>
-
-	<meta property="og:title" content="Stable Diffusion Thailand KM" />
-	<meta
-		property="og:description"
-		content="แหล่งรวบรวมข้อมูลเกี่ยวกับ Stable Diffusion ในประเทศไทย"
-	/>
-
-	<meta
-		property="og:image"
-		content="https://blogs.code.productions/content/images/2023/03/Stable-Diffusion.jpeg"
-	/>
-
-	<meta property="article:publisher" content="https://www.facebook.com/code.productions.ready" />
-	<meta property="twitter:title" content="Stable Diffusion Thailand KM" />
-	<meta
-		property="twitter:description"
-		content="แหล่งรวบรวมข้อมูลเกี่ยวกับ Stable Diffusion ในประเทศไทย"
-	/>
-
-	<meta
-		property="twitter:image"
-		content="https://blogs.code.productions/content/images/2023/03/Stable-Diffusion.jpeg"
-	/>
-</svelte:head>
-
-<div class="flex flex-col justify-center items-center mb-4">
-	<h1 class="prose text-4xl hover:text-cyan-600 transition-all duration-300">
-		Stable Diffusion Thailand Knowledge Portal
-	</h1>
-	<h3 class="prose text-xl mt-2 hover:text-cyan-600 transition-all duration-300">
-		แหล่งรวบรวมข้อมูลความรู้เกี่ยวกับ Stable Diffusion
-	</h3>
-</div>
-
-<div class="grid grid-cols-4 gap-2">
-	<input
-		type="text"
-		placeholder="ค้นหา"
-		class="input input-bordered col-span-2"
-		bind:value={search}
-		on:keyup={(event) => {
-			if (event.key === 'Enter') {
-				doSearch();
-			}
-		}}
-	/>
-	<select class="select select-bordered col-span-2" bind:value={category}>
-		<option selected value="">หมวดหมู่ทั้งหมด</option>
-		{#each data.categories as category}
-			<option value={category.id}>{category.title}</option>
-		{/each}
-	</select>
-</div>
+<HeaderCaption />
+<Searchbar categories={data.categories} />
 
 <div class="overflow-x-auto w-full">
 	<table class="table w-full">
