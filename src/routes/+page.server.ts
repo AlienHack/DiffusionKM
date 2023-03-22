@@ -1,4 +1,4 @@
-import { ToPOJO } from '$lib/helpers';
+import { ToPOJO, trimToLength } from '$lib/helpers';
 import { prisma } from '$lib/prisma';
 import type { km_category, km_content } from '@prisma/client';
 import type { PageServerLoad } from './$types';
@@ -55,6 +55,12 @@ export const load = (async (event) => {
 	});
 
 	const categories = await prisma.km_category.findMany();
+
+	contents = contents.map((content) => {
+		content.title = trimToLength(content.title ?? '', 50);
+		content.content = trimToLength(content.content ?? '', 50);
+		return content;
+	});
 
 	return {
 		contents: ToPOJO<(km_content & { km_category: km_category })[]>(contents),
