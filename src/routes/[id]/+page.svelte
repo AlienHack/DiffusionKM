@@ -13,6 +13,13 @@
 
 	<meta property="title" content="Stable Diffusion Thailand KM | {data.content.title}" />
 
+	<meta name="title" content="Stable Diffusion Thailand KM | {data.content.title}" />
+	<meta name="description" content="{data.content.km_category.title} :: {data.content.content}" />
+	<meta
+		name="keywords"
+		content="AI, Stable Diffusion, ความรู้, บทความ, เครื่องมือ, วิดีโอสอนใช้งาน, SD"
+	/>
+
 	<meta
 		property="description"
 		content="{data.content.km_category.title} :: {data.content.content}"
