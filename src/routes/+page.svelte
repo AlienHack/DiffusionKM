@@ -38,6 +38,14 @@
 	<meta property="title" content="Stable Diffusion Thailand KM" />
 
 	<meta property="description" content="แหล่งรวบรวมข้อมูลเกี่ยวกับ Stable Diffusion ในประเทศไทย" />
+
+	<meta name="title" content="Stable Diffusion Thailand KM" />
+	<meta name="description" content="แหล่งรวบรวมข้อมูลเกี่ยวกับ Stable Diffusion ในประเทศไทย" />
+	<meta
+		name="keywords"
+		content="AI, Stable Diffusion, ความรู้, บทความ, เครื่องมือ, วิดีโอสอนใช้งาน, SD"
+	/>
+
 	<meta property="og:title" content="Stable Diffusion Thailand KM" />
 	<meta
 		property="og:description"
