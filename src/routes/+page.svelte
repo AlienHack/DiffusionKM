@@ -94,10 +94,7 @@
 	<select class="select select-bordered col-span-2" bind:value={category}>
 		<option selected value="">หมวดหมู่ทั้งหมด</option>
 		{#each data.categories as category}
-			<option value={category.id}
-				><span class="badge badge-{getColor(category.title ?? 'default')} ml-2" />
-				{category.title}</option
-			>
+			<option value={category.id}>{category.title}</option>
 		{/each}
 	</select>
 </div>
