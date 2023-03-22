@@ -4,6 +4,7 @@
 	import 'nprogress/nprogress.css';
 	import NProgress from 'nprogress';
 	import { navigating } from '$app/stores';
+	import Analytics from '$lib/components/Analytics.svelte';
 
 	NProgress.configure({
 		minimum: 0.16,
@@ -21,3 +22,5 @@
 <div class="m-auto mt-10 flex w-3/4 flex-col gap-3 mb-20">
 	<slot />
 </div>
+
+<Analytics />
