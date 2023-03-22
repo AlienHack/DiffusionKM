@@ -13,17 +13,20 @@ export const load = (async (event) => {
 		OR: [
 			{
 				content: {
-					contains: searchParam
+					contains: searchParam,
+					mode: 'insensitive'
 				}
 			},
 			{
 				author: {
-					contains: searchParam
+					contains: searchParam,
+					mode: 'insensitive'
 				}
 			},
 			{
 				title: {
-					contains: searchParam
+					contains: searchParam,
+					mode: 'insensitive'
 				}
 			}
 		]
