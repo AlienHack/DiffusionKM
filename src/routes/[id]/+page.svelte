@@ -30,7 +30,7 @@
 			</pre>
 			<p class="prose prose-xl font-bold">Website</p>
 			<pre class="prose whitespace-pre-line px-4 text-justify">
-				<a href={data.content.link} target="_blank" rel="nofollow noreferer noopener"
+				<a href={data.content.link} target="_blank" rel="nofollow noreferrer noopener"
 					>{trimToLength(data.content.link ?? '', 50)}</a
 				>
 			</pre>
