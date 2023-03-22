@@ -67,6 +67,8 @@ export const load = (async (event) => {
 		categories: ToPOJO<km_category[]>(categories),
 		page: +pageParam,
 		limit: +limitParam,
-		totalPage: Math.ceil(contentsCount / +limitParam)
+		totalPage: Math.ceil(contentsCount / +limitParam),
+		search: searchParam,
+		category_id: catParam
 	};
 }) satisfies PageServerLoad;
