@@ -57,7 +57,7 @@
 		<a
 			href={content.link}
 			target="_blank"
-			rel="nofollow noreferer noopener"
+			rel="nofollow noreferrer noopener"
 			on:click={() => {
 				updateView(content.id);
 			}}
