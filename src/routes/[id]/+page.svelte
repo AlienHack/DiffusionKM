@@ -2,51 +2,12 @@
 	import { getColor, trimToLength } from '$lib/helpers';
 	import type { PageData } from './$types';
 	import DOMPurify from 'isomorphic-dompurify';
+	import DynamicMetaHeader from '$lib/components/DynamicMetaHeader.svelte';
 
 	export let data: PageData;
 </script>
 
-<svelte:head>
-	<title>Stable Diffusion Thailand KM | {data.content.title}</title>
-
-	<meta property="og:type" content="article" />
-
-	<meta property="title" content="Stable Diffusion Thailand KM | {data.content.title}" />
-
-	<meta name="title" content="Stable Diffusion Thailand KM | {data.content.title}" />
-	<meta name="description" content="{data.content.km_category.title} :: {data.content.content}" />
-	<meta
-		name="keywords"
-		content="AI, Stable Diffusion, ความรู้, บทความ, เครื่องมือ, วิดีโอสอนใช้งาน, SD"
-	/>
-
-	<meta
-		property="description"
-		content="{data.content.km_category.title} :: {data.content.content}"
-	/>
-	<meta property="og:title" content="Stable Diffusion Thailand KM | {data.content.title}" />
-	<meta
-		property="og:description"
-		content="{data.content.km_category.title} :: {data.content.content}"
-	/>
-
-	<meta
-		property="og:image"
-		content="https://blogs.code.productions/content/images/2023/03/Stable-Diffusion.jpeg"
-	/>
-
-	<meta property="article:publisher" content="https://www.facebook.com/code.productions.ready" />
-	<meta property="twitter:title" content="Stable Diffusion Thailand KM | {data.content.title}" />
-	<meta
-		property="twitter:description"
-		content="{data.content.km_category.title} :: {data.content.content}"
-	/>
-
-	<meta
-		property="twitter:image"
-		content="https://blogs.code.productions/content/images/2023/03/Stable-Diffusion.jpeg"
-	/>
-</svelte:head>
+<DynamicMetaHeader content={data.content} />
 
 <div class="flex justify-center">
 	<div class="card w-full lg:w-4/5 xl:w-2/3 bg-base-200/30 shadow-xl">
